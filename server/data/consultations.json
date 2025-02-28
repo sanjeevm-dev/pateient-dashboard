@@ -1,0 +1,538 @@
+[
+  {
+    "session_id": "session1",
+    "title": "Initial Consultation",
+    "date": "2025-02-20",
+    "messages": [
+      {
+        "_id": "msg1_1",
+        "sender": "Patient",
+        "message": "Doctor, I have been trying IVF for a few months but experiencing irregular cycles. What should I do?",
+        "context": "Patient experiencing irregular cycles affecting IVF treatment.",
+        "timestamp": "2025-02-20T10:00:00Z"
+      },
+      {
+        "_id": "msg1_2",
+        "sender": "Doctor",
+        "message": "Rashmi, I recommend conducting some hormonal tests and an ultrasound to assess the cause. Let's schedule a follow-up.",
+        "context": "Doctor advises medical tests to determine the cause of irregular cycles.",
+        "timestamp": "2025-02-20T10:05:00Z"
+      },
+      {
+        "_id": "msg1_3",
+        "sender": "Patient",
+        "message": "When should I schedule these tests? And should I continue with my current medications?",
+        "timestamp": "2025-02-20T10:07:00Z"
+      },
+      {
+        "_id": "msg1_4",
+        "sender": "Doctor",
+        "message": "Let's schedule the tests for early next week. Continue your current medications until then, but please maintain a diary of any symptoms you experience.",
+        "timestamp": "2025-02-20T10:10:00Z"
+      },
+      {
+        "_id": "msg1_5",
+        "sender": "Patient",
+        "message": "Thank you, Doctor. I'll book the appointments right away.",
+        "timestamp": "2025-02-20T10:12:00Z"
+      },
+      {
+        "_id": "msg1_6",
+        "sender": "Doctor",
+        "message": "Also, could you bring your previous three months' cycle records? It will help us better understand the pattern.",
+        "timestamp": "2025-02-20T10:15:00Z"
+      },
+      {
+        "_id": "msg1_7",
+        "sender": "Patient",
+        "message": "Yes, I have been tracking them in my phone app. Should I include the medication timing logs as well?",
+        "timestamp": "2025-02-20T10:17:00Z"
+      },
+      {
+        "_id": "msg1_8",
+        "sender": "Doctor",
+        "message": "Yes, that would be very helpful. Also note any lifestyle changes or stressors during this period.",
+        "timestamp": "2025-02-20T10:20:00Z"
+      },
+      {
+        "_id": "msg1_9",
+        "sender": "Patient",
+        "message": "I've been working longer hours recently. Could that affect my cycles?",
+        "timestamp": "2025-02-20T10:22:00Z"
+      },
+      {
+        "_id": "msg1_10",
+        "sender": "Doctor",
+        "message": "Yes, stress can definitely impact your cycles. Let's discuss stress management techniques during your next visit. Try to maintain regular sleep patterns until then.",
+        "timestamp": "2025-02-20T10:25:00Z"
+      }
+    ]
+  },
+  {
+    "session_id": "session2",
+    "title": "Test Results Discussion",
+    "date": "2025-02-22",
+    "messages": [
+      {
+        "_id": "msg2_1",
+        "sender": "Doctor",
+        "message": "Rashmi, your test results show slightly elevated prolactin levels. We might need to adjust your medication.",
+        "context": "Doctor discussing test results and suggesting medication adjustments.",
+        "timestamp": "2025-02-22T11:00:00Z"
+      },
+      {
+        "_id": "msg2_2",
+        "sender": "Patient",
+        "message": "Does this mean we have to cancel this IVF cycle?",
+        "context": "Patient concerned about impact on current IVF cycle.",
+        "timestamp": "2025-02-22T11:10:00Z"
+      },
+      {
+        "_id": "msg2_3",
+        "sender": "Doctor",
+        "message": "Not necessarily. We can try to normalize your levels with medication first. I'm prescribing Bromocriptine 2.5mg.",
+        "timestamp": "2025-02-22T11:15:00Z"
+      },
+      {
+        "_id": "msg2_4",
+        "sender": "Patient",
+        "message": "How long will it take to see results with this medication?",
+        "timestamp": "2025-02-22T11:17:00Z"
+      },
+      {
+        "_id": "msg2_5",
+        "sender": "Doctor",
+        "message": "We should see improvements within 2-3 weeks. We'll do another blood test then to check the levels.",
+        "timestamp": "2025-02-22T11:20:00Z"
+      },
+      {
+        "_id": "msg2_6",
+        "sender": "Patient",
+        "message": "Are there any dietary changes I should make while taking the new medication?",
+        "timestamp": "2025-02-22T11:25:00Z"
+      },
+      {
+        "_id": "msg2_7",
+        "sender": "Doctor",
+        "message": "Yes, it's important to maintain a balanced diet rich in proteins and vitamins. I'll send you a detailed nutrition guide.",
+        "timestamp": "2025-02-22T11:27:00Z"
+      },
+      {
+        "_id": "msg2_8",
+        "sender": "Patient",
+        "message": "Should I avoid any specific foods?",
+        "timestamp": "2025-02-22T11:30:00Z"
+      },
+      {
+        "_id": "msg2_9",
+        "sender": "Doctor",
+        "message": "Avoid excessive caffeine and processed foods. Also, limit dairy products for the first week while your body adjusts to Bromocriptine.",
+        "timestamp": "2025-02-22T11:32:00Z"
+      },
+      {
+        "_id": "msg2_10",
+        "sender": "Patient",
+        "message": "What about exercise? Can I continue my regular yoga sessions?",
+        "timestamp": "2025-02-22T11:35:00Z"
+      },
+      {
+        "_id": "msg2_11",
+        "sender": "Doctor",
+        "message": "Light yoga is fine, but avoid intense poses. Walking and gentle stretching are recommended. Monitor how you feel and don't overexert.",
+        "timestamp": "2025-02-22T11:37:00Z"
+      }
+    ]
+  },
+  {
+    "session_id": "session3",
+    "title": "Medication Review & Side Effects",
+    "date": "2025-02-25",
+    "messages": [
+      {
+        "_id": "msg3_1",
+        "sender": "Patient",
+        "message": "Doctor, I've been feeling dizzy and nauseous since taking the new medication. Is this normal?",
+        "timestamp": "2025-02-25T09:30:00Z"
+      },
+      {
+        "_id": "msg3_2",
+        "sender": "Doctor",
+        "message": "Some side effects are expected, but let's adjust your dose slightly and monitor your condition.",
+        "timestamp": "2025-02-25T09:40:00Z"
+      },
+      {
+        "_id": "msg3_3",
+        "sender": "Patient",
+        "message": "Should I take the medication with food? The symptoms seem worse on an empty stomach.",
+        "timestamp": "2025-02-25T09:45:00Z"
+      },
+      {
+        "_id": "msg3_4",
+        "sender": "Doctor",
+        "message": "Yes, definitely take it with food. Try taking it with dinner instead of breakfast, as this can help reduce nausea.",
+        "timestamp": "2025-02-25T09:50:00Z"
+      },
+      {
+        "_id": "msg3_5",
+        "sender": "Patient",
+        "message": "Thank you, I'll try that. Should I still record my symptoms?",
+        "timestamp": "2025-02-25T09:55:00Z"
+      },
+      {
+        "_id": "msg3_6",
+        "sender": "Doctor",
+        "message": "Yes, please continue keeping your symptom diary. It helps us track your progress and make necessary adjustments.",
+        "timestamp": "2025-02-25T10:00:00Z"
+      },
+      {
+        "_id": "msg3_7",
+        "sender": "Patient",
+        "message": "I've been following the diet guide, but I'm experiencing some acid reflux. Is this related?",
+        "timestamp": "2025-02-25T10:05:00Z"
+      },
+      {
+        "_id": "msg3_8",
+        "sender": "Doctor",
+        "message": "This can happen. Try eating smaller meals more frequently. Are you taking the medication at least 2 hours after dinner?",
+        "timestamp": "2025-02-25T10:07:00Z"
+      },
+      {
+        "_id": "msg3_9",
+        "sender": "Patient",
+        "message": "Sometimes I take it right after dinner. Should I change that?",
+        "timestamp": "2025-02-25T10:10:00Z"
+      },
+      {
+        "_id": "msg3_10",
+        "sender": "Doctor",
+        "message": "Yes, please wait 2-3 hours after dinner. Also, try sleeping with your head slightly elevated.",
+        "timestamp": "2025-02-25T10:12:00Z"
+      }
+    ]
+  },
+  {
+    "session_id": "session4",
+    "title": "Follow-up on Medication Adjustment",
+    "date": "2025-02-28",
+    "messages": [
+      {
+        "_id": "msg4_1",
+        "sender": "Patient",
+        "message": "Doctor, after adjusting the dosage, I feel slightly better, but I'm still experiencing mild nausea.",
+        "timestamp": "2025-02-28T10:00:00Z"
+      },
+      {
+        "_id": "msg4_2",
+        "sender": "Doctor",
+        "message": "That's good to hear. Nausea should subside in a few days, but if it persists, we can try another alternative.",
+        "timestamp": "2025-02-28T10:10:00Z"
+      },
+      {
+        "_id": "msg4_3",
+        "sender": "Patient",
+        "message": "I've also noticed my cycle seems more regular now. Is this from the medication?",
+        "timestamp": "2025-02-28T10:15:00Z"
+      },
+      {
+        "_id": "msg4_4",
+        "sender": "Doctor",
+        "message": "Yes, that's a positive sign! The medication is helping to regulate your hormone levels.",
+        "timestamp": "2025-02-28T10:20:00Z"
+      }
+    ]
+  },
+  {
+    "session_id": "session5",
+    "title": "Preparation for Next IVF Attempt",
+    "date": "2025-03-05",
+    "messages": [
+      {
+        "_id": "msg5_1",
+        "sender": "Patient",
+        "message": "Doctor, I feel ready for another IVF cycle. What are the next steps?",
+        "timestamp": "2025-03-05T09:00:00Z"
+      },
+      {
+        "_id": "msg5_2",
+        "sender": "Doctor",
+        "message": "We'll start with another round of baseline tests to ensure your hormone levels are stable before proceeding.",
+        "timestamp": "2025-03-05T09:10:00Z"
+      },
+      {
+        "_id": "msg5_3",
+        "sender": "Patient",
+        "message": "How long will the testing process take?",
+        "timestamp": "2025-03-05T09:15:00Z"
+      },
+      {
+        "_id": "msg5_4",
+        "sender": "Doctor",
+        "message": "The initial tests will take about a week. Once we confirm everything is optimal, we can start the IVF protocol.",
+        "timestamp": "2025-03-05T09:20:00Z"
+      }
+    ]
+  },
+  {
+    "session_id": "session6",
+    "title": "Baseline Test Results",
+    "date": "2025-03-12",
+    "messages": [
+      {
+        "_id": "msg6_1",
+        "sender": "Doctor",
+        "message": "Good news, Rashmi! Your hormone levels are now within the optimal range for IVF.",
+        "timestamp": "2025-03-12T14:00:00Z"
+      },
+      {
+        "_id": "msg6_2",
+        "sender": "Patient",
+        "message": "That's wonderful! When can we start the treatment?",
+        "timestamp": "2025-03-12T14:05:00Z"
+      },
+      {
+        "_id": "msg6_3",
+        "sender": "Doctor",
+        "message": "We can begin the stimulation protocol next week. I'll send you the detailed medication schedule.",
+        "timestamp": "2025-03-12T14:10:00Z"
+      },
+      {
+        "_id": "msg6_4",
+        "sender": "Patient",
+        "message": "Should I continue with the current medications until then?",
+        "timestamp": "2025-03-12T14:15:00Z"
+      },
+      {
+        "_id": "msg6_5",
+        "sender": "Doctor",
+        "message": "Yes, maintain your current medication until I provide the new protocol. We'll gradually transition to the IVF medications.",
+        "timestamp": "2025-03-12T14:20:00Z"
+      }
+    ]
+  },
+  {
+    "session_id": "session7",
+    "title": "Start of Stimulation Protocol",
+    "date": "2025-03-19",
+    "messages": [
+      {
+        "_id": "msg7_1",
+        "sender": "Patient",
+        "message": "Doctor, I've started the stimulation medications. Should I expect any side effects?",
+        "timestamp": "2025-03-19T11:00:00Z"
+      },
+      {
+        "_id": "msg7_2",
+        "sender": "Doctor",
+        "message": "Some bloating and mild discomfort is normal. Keep monitoring your symptoms and stay well-hydrated.",
+        "timestamp": "2025-03-19T11:05:00Z"
+      },
+      {
+        "_id": "msg7_3",
+        "sender": "Patient",
+        "message": "How often will I need monitoring during this phase?",
+        "timestamp": "2025-03-19T11:10:00Z"
+      },
+      {
+        "_id": "msg7_4",
+        "sender": "Doctor",
+        "message": "We'll do ultrasounds and blood tests every 2-3 days to track follicle development and hormone levels.",
+        "timestamp": "2025-03-19T11:15:00Z"
+      }
+    ]
+  },
+  {
+    "session_id": "session8",
+    "title": "Monitoring Progress",
+    "date": "2025-03-22",
+    "messages": [
+      {
+        "_id": "msg8_1",
+        "sender": "Doctor",
+        "message": "Your follicle growth is progressing well. We can see multiple follicles developing.",
+        "timestamp": "2025-03-22T10:00:00Z"
+      },
+      {
+        "_id": "msg8_2",
+        "sender": "Patient",
+        "message": "That's great! I'm feeling more bloated today. Is that expected?",
+        "timestamp": "2025-03-22T10:05:00Z"
+      },
+      {
+        "_id": "msg8_3",
+        "sender": "Doctor",
+        "message": "Yes, that's normal at this stage. Try wearing comfortable clothing and maintaining light activity.",
+        "timestamp": "2025-03-22T10:10:00Z"
+      },
+      {
+        "_id": "msg8_4",
+        "sender": "Patient",
+        "message": "When do you think the egg retrieval might be?",
+        "timestamp": "2025-03-22T10:15:00Z"
+      },
+      {
+        "_id": "msg8_5",
+        "sender": "Doctor",
+        "message": "Based on current progress, likely in 4-5 days. We'll confirm at your next monitoring appointment.",
+        "timestamp": "2025-03-22T10:20:00Z"
+      },
+      {
+        "_id": "msg8_6",
+        "sender": "Patient",
+        "message": "I've noticed some mild cramping. Is this concerning?",
+        "timestamp": "2025-03-22T10:25:00Z"
+      },
+      {
+        "_id": "msg8_7",
+        "sender": "Doctor",
+        "message": "Mild cramping is normal during follicle growth. Are you able to continue your daily activities?",
+        "timestamp": "2025-03-22T10:27:00Z"
+      },
+      {
+        "_id": "msg8_8",
+        "sender": "Patient",
+        "message": "Yes, it's manageable. Should I use a heating pad?",
+        "timestamp": "2025-03-22T10:30:00Z"
+      },
+      {
+        "_id": "msg8_9",
+        "sender": "Doctor",
+        "message": "A warm (not hot) heating pad is fine for comfort. Remember to stay hydrated and report any severe pain immediately.",
+        "timestamp": "2025-03-22T10:32:00Z"
+      }
+    ]
+  },
+  {
+    "session_id": "session9",
+    "title": "Pre-Retrieval Consultation",
+    "date": "2025-03-26",
+    "messages": [
+      {
+        "_id": "msg9_1",
+        "sender": "Doctor",
+        "message": "Your follicles have reached the optimal size. We'll schedule the retrieval for day after tomorrow.",
+        "timestamp": "2025-03-26T15:00:00Z"
+      },
+      {
+        "_id": "msg9_2",
+        "sender": "Patient",
+        "message": "What time should I arrive at the clinic? Should I fast?",
+        "timestamp": "2025-03-26T15:05:00Z"
+      },
+      {
+        "_id": "msg9_3",
+        "sender": "Doctor",
+        "message": "Please arrive at 7 AM. No food or drink after midnight. I'll send detailed instructions shortly.",
+        "timestamp": "2025-03-26T15:10:00Z"
+      },
+      {
+        "_id": "msg9_4",
+        "sender": "Patient",
+        "message": "Thank you. I'm nervous but excited.",
+        "timestamp": "2025-03-26T15:15:00Z"
+      },
+      {
+        "_id": "msg9_5",
+        "sender": "Doctor",
+        "message": "That's perfectly normal. Remember to take your trigger shot tonight at exactly 9 PM.",
+        "timestamp": "2025-03-26T15:20:00Z"
+      },
+      {
+        "_id": "msg9_6",
+        "sender": "Patient",
+        "message": "What should I wear for the procedure?",
+        "timestamp": "2025-03-26T15:25:00Z"
+      },
+      {
+        "_id": "msg9_7",
+        "sender": "Doctor",
+        "message": "Wear comfortable, loose clothing. We'll provide a hospital gown. Don't wear jewelry or makeup.",
+        "timestamp": "2025-03-26T15:27:00Z"
+      },
+      {
+        "_id": "msg9_8",
+        "sender": "Patient",
+        "message": "Should someone accompany me?",
+        "timestamp": "2025-03-26T15:30:00Z"
+      },
+      {
+        "_id": "msg9_9",
+        "sender": "Doctor",
+        "message": "Yes, please bring someone who can drive you home after the procedure. You'll need rest for the remainder of the day.",
+        "timestamp": "2025-03-26T15:32:00Z"
+      }
+    ]
+  },
+  {
+    "session_id": "session10",
+    "title": "Post-Retrieval Follow-up",
+    "date": "2025-03-28",
+    "messages": [
+      {
+        "_id": "msg10_1",
+        "sender": "Doctor",
+        "message": "The egg retrieval went well! We retrieved 12 mature eggs. How are you feeling?",
+        "timestamp": "2025-03-28T14:00:00Z"
+      },
+      {
+        "_id": "msg10_2",
+        "sender": "Patient",
+        "message": "I'm a bit sore but managing. When will we know about fertilization?",
+        "timestamp": "2025-03-28T14:05:00Z"
+      },
+      {
+        "_id": "msg10_3",
+        "sender": "Doctor",
+        "message": "We'll check fertilization tomorrow morning and update you. Continue rest and hydration.",
+        "timestamp": "2025-03-28T14:10:00Z"
+      },
+      {
+        "_id": "msg10_4",
+        "sender": "Patient",
+        "message": "Should I continue any medications?",
+        "timestamp": "2025-03-28T14:15:00Z"
+      },
+      {
+        "_id": "msg10_5",
+        "sender": "Doctor",
+        "message": "Yes, start the progesterone support as discussed. We'll review all medications at tomorrow's update.",
+        "timestamp": "2025-03-28T14:20:00Z"
+      },
+      {
+        "_id": "msg10_6",
+        "sender": "Patient",
+        "message": "What activities should I avoid in the next few days?",
+        "timestamp": "2025-03-28T14:25:00Z"
+      },
+      {
+        "_id": "msg10_7",
+        "sender": "Doctor",
+        "message": "Avoid strenuous activities, heavy lifting, and swimming for the next week. Light walking is encouraged to prevent blood clots.",
+        "timestamp": "2025-03-28T14:27:00Z"
+      },
+      {
+        "_id": "msg10_8",
+        "sender": "Patient",
+        "message": "When can I return to work?",
+        "timestamp": "2025-03-28T14:30:00Z"
+      },
+      {
+        "_id": "msg10_9",
+        "sender": "Doctor",
+        "message": "Most patients can return to desk work in 2-3 days. Listen to your body and don't rush your recovery.",
+        "timestamp": "2025-03-28T14:32:00Z"
+      },
+      {
+        "_id": "msg10_10",
+        "sender": "Patient",
+        "message": "Thank you for everything, Doctor. I'm hopeful about the results.",
+        "timestamp": "2025-03-28T14:35:00Z"
+      },
+      {
+        "_id": "msg10_11",
+        "sender": "Doctor",
+        "message": "You're welcome, Rashmi. We'll be monitoring everything closely. Rest well, and I'll see you tomorrow for the fertilization update.",
+        "timestamp": "2025-03-28T14:37:00Z"
+      }
+    ]
+  }
+]
