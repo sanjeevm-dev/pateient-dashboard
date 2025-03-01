@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+// import Tesseract from "tesseract.js";
+import pdf from "pdf-extraction";
 
 // Initialize server directories
 const initializeServerDirs = () => {
@@ -70,8 +72,27 @@ export async function POST(request) {
     const fileName = `${Date.now()}-${file.name}`;
     const filePath = path.join(files, fileName);
 
-    // Save file
+    let fileContent = "";
+
+    // Read the file buffer
     const buffer = Buffer.from(await file.arrayBuffer());
+
+    if (file.type === "application/pdf") {
+      // Extract text from the PDF
+      try {
+        const data = await pdf(buffer);
+        console.log("Extracted PDF text:", data.text);
+        fileContent = data.text;
+      } catch (err) {
+        console.error("Error extracting text from PDF:", err);
+        return NextResponse.json(
+          { error: "Failed to extract text from PDF" },
+          { status: 500 }
+        );
+      }
+    }
+
+    // Save the file to the server
     fs.writeFileSync(filePath, buffer);
 
     // Create report entry
@@ -83,6 +104,7 @@ export async function POST(request) {
       date: new Date().toISOString().split("T")[0],
       fileType,
       fileName,
+      fileContent,
       filePath: `/api/reports/file/${fileName}`,
       uploadedAt: new Date().toISOString(),
     };
@@ -99,7 +121,6 @@ export async function POST(request) {
     );
   }
 }
-
 // DELETE /api/reports?id={reportId}
 export async function DELETE(request) {
   try {

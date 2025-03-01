@@ -31,6 +31,7 @@ export default function Home() {
   const [newMessage, setNewMessage] = useState("");
   const [consultations, setConsultations] = useState([]);
   const [activeChatSessions, setActiveChatSessions] = useState([]);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -195,6 +196,17 @@ export default function Home() {
     }
   };
 
+  const LoadingMessage = () => (
+    <div className="flex items-center space-x-2 p-4 bg-gray-800 rounded-lg max-w-[80%]">
+      <div className="flex space-x-2">
+        <div className="w-3 h-3 bg-gray-300 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+        <div className="w-3 h-3 bg-gray-300 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+        <div className="w-3 h-3 bg-gray-300 rounded-full animate-bounce"></div>
+      </div>
+      <span className="text-lg text-gray-300">Generating response</span>
+    </div>
+  );
+
   const handleSendMessage = async (message) => {
     if (
       !selectedChatSession?.id ||
@@ -202,6 +214,9 @@ export default function Home() {
       !selectedChatSession.isActive
     )
       return;
+
+    setNewMessage(""); // Clear input immediately
+    setIsGenerating(true); // Show loading state
 
     try {
       const response = await fetch("/api/ai-chat", {
@@ -226,9 +241,10 @@ export default function Home() {
         )
       );
       setSelectedChatSession(updatedSession);
-      setNewMessage(""); // Clear input
     } catch (error) {
       console.error("Error sending message:", error);
+    } finally {
+      setIsGenerating(false); // Hide loading state
     }
   };
 
@@ -257,6 +273,10 @@ export default function Home() {
       setActiveChatSessions((prev) =>
         prev.filter((session) => session.id !== updatedSession.id)
       );
+      // wait for 2 sec and reload the page
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error("Error ending chat session:", error);
     }
@@ -268,7 +288,7 @@ export default function Home() {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4 ">
         <div className="bg-white rounded-lg shadow-md p-6 max-w-md w-full">
           <div className="text-red-500 mb-4">
             <svg
@@ -298,7 +318,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 ">
+    <div className="min-h-full bg-gray-50 overflow-y-hidden ">
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -357,7 +377,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row">
           {/* Sidebar - Patient Info */}
           {sidebarOpen && (
-            <div className="w-full md:w-64 bg-white rounded-lg shadow-md p-4 mb-4 md:mb-0 md:mr-4 h-[calc(100vh-5rem)]">
+            <div className="w-full md:w-64 bg-white rounded-xl shadow-md p-4 mb-4 md:mb-0 md:mr-4 h-[calc(100vh-5rem)]">
               <div className="flex flex-col items-center mb-4">
                 <Image
                   src="/profile.webp"
@@ -397,7 +417,7 @@ export default function Home() {
 
           {/* Main Content */}
           <div className="flex-1">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden h-[calc(100vh-5rem)] ">
+            <div className="bg-white rounded-xl shadow-md overflow-hidden h-[calc(100vh-5rem)] ">
               {/* Tabs and Add Report Button */}
               <div className="border-b border-gray-200 flex justify-between items-center px-4">
                 <nav className="flex">
@@ -472,7 +492,7 @@ export default function Home() {
                           >
                             <div className="flex justify-between items-center">
                               <div>
-                                <div className="flex items-center gap-2">
+                                <div className="flex text-sm items-center gap-2">
                                   <h3 className="font-medium">
                                     {session.title}
                                   </h3>
@@ -525,10 +545,117 @@ export default function Home() {
                                     className={`max-w-[70%]  p-3 rounded-2xl ${
                                       message.role === "user"
                                         ? "bg-slate-950 rounded-tr-none text-white"
-                                        : "bg-slate-200 rounded-tl-none"
+                                        : "bg-white rounded-tl-none"
                                     }`}
                                   >
-                                    <p className="text-sm">{message.content}</p>
+                                    <div className="flex flex-col space-y-2">
+                                      {message.content
+                                        .split("###")
+                                        .map((section, index) => {
+                                          if (!section.trim()) return null;
+
+                                          const [title, ...content] =
+                                            section.split("\n");
+
+                                          return (
+                                            <div
+                                              key={index}
+                                              className="rounded-lg  p-2 shadow-sm"
+                                            >
+                                              {/* Section Title */}
+                                              {title && (
+                                                <h3
+                                                  className={`text-md  ${
+                                                    message.role === "user"
+                                                      ? "text-slate-200"
+                                                      : "text-slate-950"
+                                                  } `}
+                                                >
+                                                  {title.trim()}
+                                                </h3>
+                                              )}
+
+                                              {/* Section Content */}
+                                              <div className="space-y-2">
+                                                {content.map(
+                                                  (line, lineIndex) => {
+                                                    // Handle bold text as subheadings
+                                                    if (line.includes("**")) {
+                                                      const subheading = line
+                                                        .replace(/\*\*/g, "")
+                                                        .trim();
+                                                      return (
+                                                        <h4
+                                                          key={lineIndex}
+                                                          className="text-sm font-medium text-gray-700 mt-2 mb-1"
+                                                        >
+                                                          {subheading}
+                                                        </h4>
+                                                      );
+                                                    }
+
+                                                    // Handle bullet points
+                                                    if (
+                                                      line
+                                                        .trim()
+                                                        .startsWith("-")
+                                                    ) {
+                                                      return (
+                                                        <div
+                                                          key={lineIndex}
+                                                          className="flex items-start space-x-2 ml-2"
+                                                        >
+                                                          <span className="text-blue-500 mt-1">
+                                                            •
+                                                          </span>
+                                                          <p className="text-sm text-gray-600">
+                                                            {line
+                                                              .replace("-", "")
+                                                              .trim()}
+                                                          </p>
+                                                        </div>
+                                                      );
+                                                    }
+
+                                                    // Handle key-value pairs (like test results)
+                                                    if (line.includes(":")) {
+                                                      const [key, value] =
+                                                        line.split(":");
+                                                      return (
+                                                        <div
+                                                          key={lineIndex}
+                                                          className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2"
+                                                        >
+                                                          <span className="font-medium text-md text-gray-700">
+                                                            {key.trim()}:
+                                                          </span>
+                                                          <span className="text-md text-gray-600">
+                                                            {value.trim()}
+                                                          </span>
+                                                        </div>
+                                                      );
+                                                    }
+
+                                                    // Regular text
+                                                    if (line.trim()) {
+                                                      return (
+                                                        <p
+                                                          key={lineIndex}
+                                                          className="text-md text-gray-600"
+                                                        >
+                                                          {line.trim()}
+                                                        </p>
+                                                      );
+                                                    }
+
+                                                    return null;
+                                                  }
+                                                )}
+                                              </div>
+                                            </div>
+                                          );
+                                        })}
+                                    </div>
                                     <p className="text-xs mt-1 opacity-70 text-slate-400">
                                       {new Date(
                                         message.timestamp
@@ -540,30 +667,65 @@ export default function Home() {
                             </div>
                           </div>
                           {selectedChatSession.isActive && (
-                            <div className="border-t border-gray-200 p-4">
-                              <div className="flex space-x-2">
-                                <input
-                                  type="text"
-                                  value={newMessage}
-                                  onChange={(e) =>
-                                    setNewMessage(e.target.value)
+                            <div className="flex items-center space-x-2 p-4 border-t border-slate-400">
+                              <input
+                                type="text"
+                                value={newMessage}
+                                onChange={(e) => setNewMessage(e.target.value)}
+                                placeholder={
+                                  isGenerating
+                                    ? "Generating response..."
+                                    : "Type your message..."
+                                }
+                                disabled={isGenerating}
+                                className={`flex-1 p-2 rounded-lg border ${
+                                  isGenerating
+                                    ? "bg-gray-100 text-gray-500"
+                                    : "bg-white text-gray-900"
+                                }`}
+                                onKeyPress={(e) => {
+                                  if (e.key === "Enter" && !e.shiftKey) {
+                                    e.preventDefault();
+                                    handleSendMessage(newMessage);
                                   }
-                                  onKeyPress={(e) => {
-                                    if (e.key === "Enter" && !e.shiftKey) {
-                                      e.preventDefault();
-                                      handleSendMessage(newMessage);
-                                    }
-                                  }}
-                                  placeholder="Type your message..."
-                                  className="flex-1 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-950"
-                                />
-                                <button
-                                  onClick={() => handleSendMessage(newMessage)}
-                                  className="bg-slate-950 text-white px-4 py-2 rounded-md hover:bg-white hover:text-slate-950 hover:border"
-                                >
-                                  Send
-                                </button>
-                              </div>
+                                }}
+                              />
+                              <button
+                                onClick={() => handleSendMessage(newMessage)}
+                                disabled={isGenerating || !newMessage.trim()}
+                                className={`px-4 py-2 rounded-lg border transition-all duration-300 ease-in-out
+    ${
+      isGenerating || !newMessage.trim()
+        ? "bg-slate-950 text-white border-gray-300 cursor-not-allowed"
+        : "bg-slate-950 text-white border-slate-950 hover:bg-white hover:text-slate-950 hover:border-slate-950 hover:shadow-md"
+    }`}
+                              >
+                                {isGenerating ? (
+                                  <span className="flex items-center space-x-2">
+                                    <svg
+                                      className="animate-spin h-5 w-5"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <circle
+                                        className="opacity-25"
+                                        cx="12"
+                                        cy="12"
+                                        r="10"
+                                        stroke="currentColor"
+                                        strokeWidth="4"
+                                      />
+                                      <path
+                                        className="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                      />
+                                    </svg>
+                                    <span>Generating...</span>
+                                  </span>
+                                ) : (
+                                  "Send"
+                                )}
+                              </button>
                             </div>
                           )}
                         </>
@@ -588,7 +750,7 @@ export default function Home() {
                           >
                             <div className="flex justify-between items-center">
                               <div>
-                                <h3 className="font-medium">
+                                <h3 className="font-medium text-sm">
                                   {consultation.title}
                                 </h3>
                                 <p className="text-xs text-slate-400">

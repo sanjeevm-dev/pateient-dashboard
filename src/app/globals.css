@@ -1,1 +1,83 @@
 @import "tailwindcss";
+
+/* Extend background image utilities */
+@layer utilities {
+  .bg-custom-svg {
+    background-image: url("/Abstract.svg");
+  }
+}
+
+@theme {
+  @keyframes bxSpin {
+    17% {
+      border-bottom-right-radius: 3px;
+    }
+    25% {
+      transform: translateY(9px) rotate(22.5deg);
+    }
+    50% {
+      transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+      border-bottom-right-radius: 40px;
+    }
+    75% {
+      transform: translateY(9px) rotate(67.5deg);
+    }
+    100% {
+      transform: translateY(0) rotate(90deg);
+    }
+  }
+
+  @keyframes shadow {
+    0%,
+    100% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1.2, 1);
+    }
+  }
+
+  --animate-bxSpin: bxSpin 0.5s linear infinite;
+  --animate-shadow: shadow 0.5s linear infinite;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #060015;
+  background-image: linear-gradient(#030712, #111827, #030712);
+  border-radius: 10px;
+  /* background-image: linear-gradient(180deg, #333334 0%, #1e1e2d 99%); */
+  border-radius: 100px;
+}
+
+/* Target the scrollable area of the antd table */
+.ant-table-body {
+  /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #040404 transparent;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.ant-table-body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.ant-table-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ant-table-body::-webkit-scrollbar-thumb {
+  background-color: #a0aec0; /* Lighter shade */
+  background-image: linear-gradient(#edf2f7, #e2e8f0, #edf2f7);
+  border-radius: 100px;
+}

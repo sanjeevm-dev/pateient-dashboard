@@ -18,17 +18,19 @@ export async function POST() {
     }
 
     // Read existing sessions
+    // Read existing sessions
     let sessions = [];
     if (fs.existsSync(dataPath)) {
       sessions = JSON.parse(fs.readFileSync(dataPath, "utf8"));
     }
 
-    // Create new session
+    // Create a dynamic session name
+    const sessionNumber = sessions.length + 1;
     const newSession = {
       id: `session${Date.now()}`,
-      title: "New Chat Session",
+      title: `Session ${sessionNumber}`,
       createdAt: new Date().toISOString(),
-      isActive: true, // Make sure this is set to true
+      isActive: true,
       messages: [],
     };
 
