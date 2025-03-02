@@ -10,10 +10,53 @@ import {
   X,
   MessageSquare,
   Trash2,
+  AlertCircle,
 } from "lucide-react";
 import Image from "next/image";
 import UploadReportModal from "./components/UploadReportModal";
 import Loader from "./components/Loader";
+
+// Enhanced Toast component
+const Toast = ({ message, onClose }) => {
+  const [isExiting, setIsExiting] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsExiting(true);
+      setTimeout(onClose, 300); // Wait for exit animation
+    }, 2700); // Slightly less than progress bar to ensure smooth transition
+
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  return (
+    <div
+      className={`fixed top-4 right-4 flex items-center gap-3 min-w-[320px] bg-gradient-to-r from-slate-900 to-slate-800 text-white px-4 py-3 rounded-lg shadow-lg z-50 ${
+        isExiting ? "animate-slide-out" : "animate-slide-in"
+      }`}
+    >
+      <div className="flex items-center gap-3 flex-1">
+        <div className="flex-shrink-0">
+          <AlertCircle className="h-5 w-5 text-blue-400" />
+        </div>
+        <p className="text-sm font-medium pr-4">{message}</p>
+      </div>
+      <button
+        onClick={() => {
+          setIsExiting(true);
+          setTimeout(onClose, 300);
+        }}
+        className="flex-shrink-0 rounded-full p-1 hover:bg-slate-700 transition-colors duration-200"
+      >
+        <X className="h-4 w-4" />
+      </button>
+      {/* Progress bar */}
+      <div className="absolute bottom-0 left-0 h-1 bg-blue-400/20 w-full rounded-b-lg overflow-hidden">
+        <div className="h-full bg-blue-400 animate-progress rounded-lg" />
+      </div>
+    </div>
+  );
+};
 
 export default function Home() {
   const [selectedSession, setSelectedSession] = useState(null);
@@ -32,6 +75,13 @@ export default function Home() {
   const [consultations, setConsultations] = useState([]);
   const [activeChatSessions, setActiveChatSessions] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  // Add showToast function
+  const showToast = (message) => {
+    setToast(message);
+    setTimeout(() => setToast(null), 3000);
+  };
 
   useEffect(() => {
     const loadData = async () => {
@@ -137,7 +187,7 @@ export default function Home() {
       setSelectedReport(null);
     } catch (error) {
       console.error("Error deleting report:", error);
-      alert("Failed to delete report. Please try again.");
+      showToast("Failed to delete report. Please try again.");
     }
   };
 
@@ -173,7 +223,7 @@ export default function Home() {
       setSelectedSession(newSession);
     } catch (error) {
       console.error("Error creating new session:", error);
-      alert("Failed to create new session. Please try again.");
+      showToast("Failed to create new session. Please try again.");
     }
   };
 
@@ -192,7 +242,7 @@ export default function Home() {
       setSelectedChatSession(newSession);
     } catch (error) {
       console.error("Error creating new chat:", error);
-      alert("Failed to create new chat. Please try again.");
+      showToast("Failed to create new chat. Please try again.");
     }
   };
 
@@ -282,6 +332,21 @@ export default function Home() {
     }
   };
 
+  // Update handleTabSwitch to use showToast
+  const handleTabSwitch = (tab) => {
+    if (selectedChatSession?.isActive && tab !== "chat") {
+      showToast("Please end the current chat session before switching tabs.");
+      return;
+    }
+    setActiveTab(tab);
+  };
+
+  // Add function to handle Ask AI from other tabs
+  const handleAskAI = async () => {
+    await handleNewChat();
+    setActiveTab("chat");
+  };
+
   if (loading) {
     return <Loader text="Loading reports..." />;
   }
@@ -319,6 +384,9 @@ export default function Home() {
 
   return (
     <div className="min-h-full bg-gray-50 overflow-y-hidden ">
+      {/* Add Toast component */}
+      {toast && <Toast message={toast} onClose={() => setToast(null)} />}
+
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -422,7 +490,7 @@ export default function Home() {
               <div className="border-b border-gray-200 flex justify-between items-center px-4">
                 <nav className="flex">
                   <button
-                    onClick={() => setActiveTab("chat")}
+                    onClick={() => handleTabSwitch("chat")}
                     className={`px-4 py-3 text-sm font-medium ${
                       activeTab === "chat"
                         ? "border-b-2 border-slate-950 text-blue-600"
@@ -432,7 +500,7 @@ export default function Home() {
                     AI Chat
                   </button>
                   <button
-                    onClick={() => setActiveTab("consultations")}
+                    onClick={() => handleTabSwitch("consultations")}
                     className={`px-4 py-3 text-sm font-medium ${
                       activeTab === "consultations"
                         ? "border-b-2 border-slate-950 text-blue-600"
@@ -442,7 +510,7 @@ export default function Home() {
                     Consultations
                   </button>
                   <button
-                    onClick={() => setActiveTab("reports")}
+                    onClick={() => handleTabSwitch("reports")}
                     className={`px-4 py-3 text-sm font-medium ${
                       activeTab === "reports"
                         ? "border-b-2 border-slate-950 text-blue-600"
@@ -453,24 +521,46 @@ export default function Home() {
                   </button>
                 </nav>
 
-                {activeTab === "reports" && (
-                  <button
-                    onClick={() => setIsUploadModalOpen(true)}
-                    className="bg-slate-950 hover:bg-white hover:text-slate-950 hover:border text-white px-4 py-2 rounded-md flex items-center gap-2 text-sm"
-                  >
-                    <FileText size={16} />
-                    Add Report
-                  </button>
-                )}
+                <div className="flex gap-2">
+                  {activeTab === "reports" && (
+                    <>
+                      <button
+                        onClick={handleAskAI}
+                        className="bg-slate-950 hover:bg-white hover:text-slate-950 hover:border text-white px-4 py-2 rounded-md flex items-center gap-2 text-sm"
+                      >
+                        <MessageSquare size={16} />
+                        Ask AI
+                      </button>
+                      <button
+                        onClick={() => setIsUploadModalOpen(true)}
+                        className="bg-slate-950 hover:bg-white hover:text-slate-950 hover:border text-white px-4 py-2 rounded-md flex items-center gap-2 text-sm"
+                      >
+                        <FileText size={16} />
+                        Add Report
+                      </button>
+                    </>
+                  )}
 
-                {activeTab === "chat" && (
-                  <button
-                    onClick={handleNewChat}
-                    className="bg-slate-950 hover:bg-white hover:text-slate-950 hover:border text-white px-4 py-2 rounded-md flex items-center gap-2 text-sm"
-                  >
-                    New Chat
-                  </button>
-                )}
+                  {activeTab === "consultations" && (
+                    <button
+                      onClick={handleAskAI}
+                      className="bg-slate-950 hover:bg-white hover:text-slate-950 hover:border text-white px-4 py-2 rounded-md flex items-center gap-2 text-sm"
+                    >
+                      <MessageSquare size={16} />
+                      Ask AI
+                    </button>
+                  )}
+
+                  {activeTab === "chat" && (
+                    <button
+                      onClick={handleNewChat}
+                      className="bg-slate-950 hover:bg-white hover:text-slate-950 hover:border text-white px-4 py-2 rounded-md flex items-center gap-2 text-sm"
+                    >
+                      <MessageSquare size={16} />
+                      Ask AI
+                    </button>
+                  )}
+                </div>
               </div>
 
               {/* Content Container */}

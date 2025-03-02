@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "session1740803287996",
+    "title": "Session 1",
+    "createdAt": "2025-03-01T04:28:07.996Z",
+    "isActive": false,
+    "messages": [
+      {
+        "id": "msg_1740803297458",
+        "role": "user",
+        "content": "what does my SEMEN ANALYSIS reports say",
+        "timestamp": "2025-03-01T04:28:17.458Z"
+      },
+      {
+        "id": "msg_1740803302833",
+        "role": "assistant",
+        "content": "### Test Results\n**Hormone Levels**\n- Sperm Concentration: 54.7 million/mL (normal range: 60-120 million/mL)\n- Progressive Motility: 70% (normal range: >40%)\n- Non-Progressive Motility: 20%\n- Immotile Sperm: 10%\n\n**Other Parameters**\n- Semen Volume: 1.0 mL (normal range: >= 1.5 mL)\n- Liquefaction Time: 40 minutes (normal range: 30 - 60 minutes)\n- Appearance: Normal (Opaque, Grey, Homogenous)\n\n### Summary\n**Key Findings**\n- The semen analysis indicates a low sperm count (54.7 million/mL) which is below the normal range.\n- The motility of sperm is normal, with 70% showing progressive motility.\n\n**Clinical Interpretation**\n- The low sperm concentration may affect fertility potential, but the normal motility suggests that the sperm that are present are capable of movement, which is a positive sign.\n\n### Recommendations\n**Immediate Actions**\n- Consider consulting with a fertility specialist to discuss the implications of the low sperm count.\n- Additional tests may be needed to evaluate other factors affecting fertility.\n\n**Follow-up Care**\n- Regular monitoring of sperm parameters may be beneficial.\n- Schedule a follow-up appointment to discuss potential lifestyle changes or treatments that could improve sperm count.",
+        "timestamp": "2025-03-01T04:28:22.832Z"
+      }
+    ]
+  }
+]

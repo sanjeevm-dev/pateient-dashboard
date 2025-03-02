@@ -12,6 +12,7 @@
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "@react-pdf/renderer": "^4.2.2",
+    "antd": "^5.24.2",
     "axios": "^1.8.1",
     "lucide-react": "^0.476.0",
     "next": "15.2.0",
